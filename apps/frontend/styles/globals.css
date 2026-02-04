@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root{
+  --brand-blue: #0033A0; /* deep flag blue */
+  --brand-green: #007A3D; /* flag green */
+  --brand-white: #ffffff;
+}
+
+html,body,#__next{
+  height:100%;
+}
+
+body{
+  font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  /* removed fixed page-wide stripes; sections will carry flag colors individually */
+  color: #0f172a;
+}
+
+/* Small decorative blue triangle with yellow star will be rendered in header SVG; keep pages accessible */
+
+/* Leadership cards: accessible focus */
+.lead-card:focus{outline:2px solid rgba(0,0,0,0.12); outline-offset:3px}
+
+/* Section backgrounds using flag palette */
+
+/* Only allow blue, green, white section backgrounds per request */
+.bg-flag-blue{background: var(--brand-blue); color: var(--brand-white)}
+.bg-flag-green{background: var(--brand-green); color: var(--brand-white)}
+.bg-flag-white{background: var(--brand-white); color: #0f172a}
+
+/* ensure headings and basic text are high contrast on colored sections */
+.bg-flag-blue h1,.bg-flag-blue h2,.bg-flag-blue p, .bg-flag-blue a{color: var(--brand-white)}
+.bg-flag-green h1,.bg-flag-green h2,.bg-flag-green p, .bg-flag-green a{color: var(--brand-white)}
+.bg-flag-white h1,.bg-flag-white h2,.bg-flag-white p, .bg-flag-white a{color: #0f172a}
+
+
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased;
+}

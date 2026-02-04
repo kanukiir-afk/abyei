@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  phone     String?
+  passwordHash String?
+  role      Role     @default(MEMBER)
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  member    Member?  @relation()
+  verificationTokens VerificationToken[]
+}
+
+model Member {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  location  String?
+  tribe     String?
+  interests String?
+}
+
+model News {
+  id        String   @id @default(uuid())
+  title     String
+  slug      String   @unique
+  content   String
+  image     String?
+  authorId  String
+  published Boolean  @default(false)
+  categories String[]
+  tags      String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  location    String?
+  address     String?
+  startAt     DateTime
+  endAt       DateTime?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  url       String
+  type      MediaType
+  caption   String?
+  createdAt DateTime @default(now())
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  MEMBER
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
