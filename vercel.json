@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "buildCommand": "cd apps/frontend && npm install && npm run build",
+  "buildCommand": "cd apps/frontend && npm run build",
   "outputDirectory": "apps/frontend/.next",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "@next_public_api_url"
-  }
+  "projectSettings": {
+    "installCommand": "cd apps/frontend && npm install",
+    "buildCommand": "npm run build",
+    "outputDirectory": ".next",
+    "nodeVersion": "18.x"
+  },
+  "redirects": [],
+  "rewrites": []
 }
