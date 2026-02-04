@@ -9,12 +9,17 @@ export default function CommunityStats() {
 
   useEffect(() => {
     let mounted = true;
-    api
-      .get("/api/stats")
-      .then((r) => mounted && setStats(r.data))
-      .catch(() => {})
-      .finally(() => {});
-    return () => (mounted = false);
+    (async () => {
+      try {
+        const response = await api.get("/api/stats");
+        if (mounted) setStats(response.data);
+      } catch (error) {
+        // Handle error silently
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (

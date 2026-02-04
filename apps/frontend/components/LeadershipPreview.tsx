@@ -9,11 +9,17 @@ export default function LeadershipPreview() {
 
   useEffect(() => {
     let mounted = true;
-    api
-      .get("/api/admin/leaders")
-      .then((r) => mounted && setLeaders(r.data || []))
-      .catch(() => setLeaders([]));
-    return () => (mounted = false);
+    (async () => {
+      try {
+        const response = await api.get("/api/admin/leaders");
+        if (mounted) setLeaders(response.data || []);
+      } catch (error) {
+        if (mounted) setLeaders([]);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (

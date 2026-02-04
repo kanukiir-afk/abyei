@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { api } from "../lib/api";
 
@@ -25,21 +24,5 @@ export default function AdminLogin() {
       <input aria-label="Admin password" type="password" className="w-full border p-2 rounded mb-3" {...register("password", { required: true })} />
       <button className="w-full bg-sscPrimary text-white py-2 rounded" disabled={formState.isSubmitting}>Sign in</button>
     </form>
-  );
-}
-import React from "react";
-
-export default function AdminLogin() {
-  return (
-    <div className="bg-white text-sscPrimary p-6 rounded shadow">
-      <h3 className="text-xl font-semibold">Admin Login</h3>
-      <form className="mt-4" onSubmit={(e) => e.preventDefault()}>
-        <label className="block text-sm">Email</label>
-        <input name="email" type="email" className="w-full mt-1 p-2 border rounded" />
-        <label className="block text-sm mt-2">Password</label>
-        <input name="password" type="password" className="w-full mt-1 p-2 border rounded" />
-        <button className="mt-4 w-full bg-sscWarm text-white py-2 rounded">Login</button>
-      </form>
-    </div>
   );
 }
